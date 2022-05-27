@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title th:text="${dados.nome + ' - Dados pessoais com comentários'}"></title>
+        <link rel="stylesheet" th:href="@{/css/estilos-visualizacao.css}" />
+        <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+              crossorigin="anonymous">
+    </head>
+
+    <body style="background-color: rgba(180, 198, 231, 255)">
+        <main>
+            <header>
+                <h1 th:text="${dados.nome}">Fernando Tsuda</h1>
+            </header>
+            <section class="dados-contato">
+                <div>
+                    <img class="pessoa-avatar" th:src="@{/img/{foto}(foto=${dados.arquivoFoto})}" title="Foto do perfil" />
+                </div>
+                <div>
+                    <p>Data de nascimento: <span th:text="${#temporals.format(dados.dataNascimento, 'dd/MM/yyyy')}">01/01/1982</span></p>
+                    <p>Telefone: <span th:text="${dados.telefone}">(11) 99999-1234</span></p>
+                    <p>E-mail: <span th:text="${dados.email}">BATATINHA123@teste.com.br</span></p>
+                    <p>LinkedIn: <a th:href="@{dados.linkedinUrl}" th:text="${dados.linkedinUrl}">https://br.linkedin.com/in/BATATINHA123</a></p>
+                    <p>Github: <a th:href="@{dados.githubUrl}" th:text="${dados.githubUrl}">https://github.com/BATATINHA123</a></p>
+                </div>
+            </section>
+            <div style="margin: 10px 0;">
+                <a th:href="@{/pessoas}" style=" font-size: 1.2rem;">Voltar</a>
+            </div>
+
+            <!-- SUBSTITUIR O CÓDIGO html ABAIXO PARA MOSTRAR O FORMULÁRIO E A LISTAGEM DOS COMENTÁRIOS CADASTRADOS -->
+
+            <!-- CARD DO FORMULÁRIO -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Incluir comentário</h4>
+                </div>
+                <div class="card-body">
+                    <!-- MEXER NO THYMELEAF -->
+                    <form action="#" method="POST">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input id="nome" type="text" class="form-control" placeholder="Nome">
+                            </div>
+                            <div class="col">
+                                <input id="email" type="text" class="form-control" placeholder="E-mail">
+                            </div>
+                        </div>
+                        <textarea id="comentario" class="form-control" placeholder="Escreva seu comentário" rows="3"></textarea>
+                    </form>
+                </div>
+                <div class="card-footer align-center">
+                    <button type="submit" class="btn btn-primary">Enviar comentário!</button>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <!-- CARD DA LISTA DE COMENTÁRIOS -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Comentários</h4>
+                </div>
+                <div class="card-body">
+                    <!-- código da listagem aqui -->
+                </div>
+            </div>
+        </main>
+
+        <script th:src="@{/js/funcoes.js}"></script>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+        crossorigin="anonymous"></script>
+    </body>
+
+</html>
