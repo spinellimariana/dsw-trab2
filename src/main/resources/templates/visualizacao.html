@@ -43,32 +43,41 @@
                 </div>
                 <div class="card-body">
                     <!-- MEXER NO THYMELEAF -->
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" th:action="@{/pessoas/salvar/{id}(id=${dados.id})}" th:object="${comentario}">
                         <div class="row mb-3">
                             <div class="col">
-                                <input id="nome" type="text" class="form-control" placeholder="Nome">
+                                <input id="nome" type="text" 
+                                       class="form-control" placeholder="Nome" th:field="*{nome}">
                             </div>
                             <div class="col">
-                                <input id="email" type="text" class="form-control" placeholder="E-mail">
+                                <input id="email" type="text" 
+                                       class="form-control" placeholder="E-mail" th:field="*{email}">
                             </div>
                         </div>
-                        <textarea id="comentario" class="form-control" placeholder="Escreva seu comentário" rows="3"></textarea>
-                    </form>
+                        <textarea id="comentario" class="form-control" placeholder="Escreva seu comentário" 
+                                  rows="3" th:field="*{comentario}"></textarea>
+
                 </div>
-                <div class="card-footer align-center">
+                <div class="card-footer text-center">
                     <button type="submit" class="btn btn-primary">Enviar comentário!</button>
                 </div>
+                </form>
             </div>
-            
+
+
             <hr>
-            
+
             <!-- CARD DA LISTA DE COMENTÁRIOS -->
             <div class="card">
                 <div class="card-header">
                     <h4>Comentários</h4>
                 </div>
                 <div class="card-body">
-                    <!-- código da listagem aqui -->
+                    <div th:each="c : ${lista}">
+                        <h5 class="card-title" th:text="${c.nome}"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" th:text="${c.email} + ' - ' + ${c.dataHora}"></h6>
+                        <p th:text="${c.comentario}"></p>
+                    </div>
                 </div>
             </div>
         </main>
