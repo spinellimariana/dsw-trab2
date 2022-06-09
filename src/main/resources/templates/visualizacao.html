@@ -14,6 +14,10 @@
     </head>
 
     <body style="background-color: rgba(180, 198, 231, 255)">
+        <div class="alert alert-danger" role="alert" th:if="${!#strings.isEmpty(msgErro)}">
+            <h4 class="alert-heading">Erro</h4>
+            <p class="mb-0" th:text="${msgErro}"></p>
+        </div>
         <main>
             <header>
                 <h1 th:text="${dados.nome}">Fernando Tsuda</h1>
@@ -43,18 +47,27 @@
                 </div>
                 <div class="card-body">
                     <!-- MEXER NO THYMELEAF -->
+                    <div class="pb-2">
+                        <h7>*Campos Obrigatórios</h7>
+                    </div>
+
                     <form action="#" method="POST" th:action="@{/pessoas/salvar/{id}(id=${dados.id})}" th:object="${comentario}">
+<!--                        <div class="form-floating mb-3" th:if="${param.error}">
+                            <div class="alert alert-danger">Invalid username or
+                                password.</div>
+                        </div>-->
                         <div class="row mb-3">
                             <div class="col">
-                                <input id="nome" type="text" 
-                                       class="form-control" placeholder="Nome" th:field="*{nome}">
+                                <input id="nome" type="text" required
+                                       class="form-control" placeholder="Nome*" th:field="*{nome}">
                             </div>
                             <div class="col">
-                                <input id="email" type="text" 
-                                       class="form-control" placeholder="E-mail" th:field="*{email}">
+                                <input id="email" type="text" required
+                                       class="form-control" placeholder="E-mail*" th:field="*{email}">
+<!--                                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>-->
                             </div>
                         </div>
-                        <textarea id="comentario" class="form-control" placeholder="Escreva seu comentário" 
+                        <textarea id="comentario" required class="form-control" placeholder="Escreva seu comentário*" 
                                   rows="3" th:field="*{comentario}"></textarea>
 
                 </div>
@@ -77,7 +90,8 @@
                         <h5 class="card-title" th:text="${c.nome}"></h5>
                         <h6 class="card-subtitle mb-2 text-muted" th:text="${c.email} + ' - ' + ${c.dataHora}"></h6>
                         <p th:text="${c.comentario}"></p>
-                    </div>
+                    <hr>
+                    </div> 
                 </div>
             </div>
         </main>

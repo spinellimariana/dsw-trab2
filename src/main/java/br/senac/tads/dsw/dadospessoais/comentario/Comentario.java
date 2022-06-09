@@ -8,6 +8,7 @@ package br.senac.tads.dsw.dadospessoais.comentario;
 import br.senac.tads.dsw.dadospessoais.pessoas.DadosPessoais;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +23,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comentario {
@@ -40,8 +39,64 @@ public class Comentario {
     @PastOrPresent
     @NotNull
     private LocalDateTime dataHora = LocalDateTime.now();
+    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     
     @ManyToOne
     private DadosPessoais pessoa;
+
+//    public LocalDateTime getDataHora(String dataFormat) {
+//        dataFormat = formatter.format(dataHora);
+//        return dataHora;
+//    }
+    
+    //construtores estavam dando erro acabei gerando com lombok
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public DadosPessoais getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(DadosPessoais pessoa) {
+        this.pessoa = pessoa;
+    }
 
 }

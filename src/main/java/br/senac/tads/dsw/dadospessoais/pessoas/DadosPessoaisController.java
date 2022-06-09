@@ -52,13 +52,13 @@ public class DadosPessoaisController {
 
     @PostMapping("/salvar/{id}") //salvar no BD
     public String salvar(@ModelAttribute("comentario") ComentarioDto comentario, @PathVariable(value = "id") Integer id) {
-        Comentario c = new Comentario();
+        Comentario c = new Comentario();      
         c.setNome(comentario.getNome());
         c.setEmail(comentario.getEmail());
         c.setComentario(comentario.getComentario());
         Optional<DadosPessoais> op = dadosPessoaisRepository.findById(id);
         c.setPessoa(op.get());
         comentarioRepository.save(c);
-        return "redirect:/pessoas/"+ id + "/visualizar";
+        return "redirect:/pessoas/" + id + "/visualizar";
     }
 }
